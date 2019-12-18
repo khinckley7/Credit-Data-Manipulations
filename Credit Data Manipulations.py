@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-### Data description ###
+### Data description 
 ### Credit loan data set (2000x29)
 ### Attributes used: Current unpaid balance, Loan to Value ratio, FICO score, Loan number, Loan date
 
@@ -21,17 +21,18 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 150)
 
 
-
 ### --------------- REPORT 1: Data by Lender Institution Type --------------- ###
 ### Group by type of lender institution
 ### Find loan count, mean and max/min current unpaid balances by lender type
 
-# Use agg() to calculate
+# Use .groupby().agg() to create dataframe with count, mean, and max/min values
 df_by_lender_type = df.groupby('LENDER_INST_TYPE_DESCRIPTION').agg(
 	{
 	'LOAN_NUMBER': [('LOAN_COUNT', 'count')],
 	'CURRENT_BALANCE': [('MEAN_CURRENT_BALANCE', 'mean'), ('MAX_CURRENT_BALANCE', max), ('MIN_CURRENT_BALANCE', min)]
 	})
+
+
 
 ### --------------- REPORT 2: Data by LTV (Loan to Value) Cohorts --------------- ###
 ### Split dataframe into Loan to Value (LTV) cohorts/bins
@@ -88,6 +89,7 @@ unknown_age_count = loans_unknown_age['LOAN_NUMBER'].count()
 unknown_age_mean_balance = loans_unknown_age['CURRENT_BALANCE'].mean()
 unknown_age_max_balance = loans_unknown_age['CURRENT_BALANCE'].max()
 unknown_age_min_balance = loans_unknown_age['CURRENT_BALANCE'].min()
+
 
 
 ### --------------- REPORT 4: Total CURRENT_BALANCE by LTV Cohorts and FICO Cohorts ------------- ###
